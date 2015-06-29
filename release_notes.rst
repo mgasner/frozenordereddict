@@ -1,6 +1,9 @@
 
 frozenordereddict release notes
 ========================
+1.2.1
+=====
+ * Fix problem with README specification in MANIFEST.in.
 
 1.2.0
 =====
