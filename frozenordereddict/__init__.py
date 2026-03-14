@@ -1,8 +1,6 @@
-from collections import Mapping
-try:
-    from collections import OrderedDict
-except ImportError:
-    from ordereddict import OrderedDict
+from collections import OrderedDict
+from collections.abc import Mapping
+from functools import reduce
 
 import operator
 
@@ -27,12 +25,12 @@ class FrozenOrderedDict(Mapping):
 
     def __hash__(self):
         if self.__hash is None:
-            self.__hash = reduce(operator.xor, map(hash, self.iteritems()), 0)
+            self.__hash = reduce(operator.xor, map(hash, self.items()), 0)
 
         return self.__hash
 
     def __repr__(self):
-        return '{}({!r})'.format(self.__class__.__name__, self.items())
+        return '{}({!r})'.format(self.__class__.__name__, list(self.items()))
 
     def copy(self, *args, **kwargs):
         new_dict = self.__dict.copy()
